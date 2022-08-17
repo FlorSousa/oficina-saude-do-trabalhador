@@ -1,1 +1,98 @@
-<h1>Chat</h1>
+<html>
+
+<head>
+    <title>Oficina Saude do Trabalhador</title>
+</head>
+
+<style>
+    * {
+        --inputWidth: 95%;
+    }
+
+    #messages {
+        width: 100%;
+        height: 90%;
+        background-color: white;
+        box-shadow: 2px 0px 10px black;
+        margin-bottom: 1%;
+        overflow-y: auto;
+    }
+
+    #message {
+        width: var(--inputWidth);
+        height: 5%;
+    }
+
+
+    #sub {
+        display: "flex";
+        flex-direction: row;
+    }
+
+    #sub button {
+        height: 5%;
+    }
+
+    .recive {
+        padding: 1% 0% 1% 2%;
+    }
+
+    .recive label {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 18px;
+    }
+
+    .myMessage {
+        color:red !important
+    }
+</style>
+
+<script>
+    function sendMessage(message) {
+        try {
+            return message
+        } catch (error) {
+            return error
+        }
+    }
+
+    function recive() {
+
+    }
+    
+    function createNewMessage(new_message, from) {
+        const msgBox = document.createElement("div")
+        msgBox.className="recive"
+        const msgText = document.createElement("label")
+        msgText.innerHTML = `eu: ${new_message}`
+        if(from === "me") msgText.className = "myMessage"
+        msgBox.appendChild(msgText)
+        document.getElementById("messages").appendChild(msgBox)
+    }
+    const methods = {
+        "send": message => sendMessage(message),
+        "recive": () => recive()
+    }
+    window.addEventListener("click", e => {
+        try {
+            const inputValue = document?.getElementById("message")?.value
+            const response = methods[e?.target?.name] ? methods[e?.target?.name](inputValue) : null
+            if (response) createNewMessage(inputValue, "me")
+        } catch (error) {
+            console.log(error)
+            console.log("ocorreu um erro")
+        }
+    })
+
+</script>
+
+<body>
+    <div id="messages"></div>
+    <div id="sub">
+        <input id="message" maxlength="180" type="text">
+        <button name="send">enviar</button>
+    </div>
+
+</body>
+
+</html>
