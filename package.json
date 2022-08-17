@@ -1,0 +1,27 @@
+{
+  "name": "oficina-saude-do-trabalhador",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlorSousa/oficina-saude-do-trabalhador.git"
+  },
+  "author": "FlorSousa,beatrizstar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FlorSousa/oficina-saude-do-trabalhador/issues"
+  },
+  "homepage": "https://github.com/FlorSousa/oficina-saude-do-trabalhador#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "path": "^0.12.7"
+  },
+  "type": "module"
+}
