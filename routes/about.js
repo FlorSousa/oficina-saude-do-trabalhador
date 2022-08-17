@@ -1,10 +1,12 @@
 import express from 'express';
-import path from 'path'
-export const AboutHomes = express.Router()
+import {fileURLToPath} from 'url';
+export const AboutRoutes = express.Router()
 
-AboutHomes.use(express.json())
-AboutHomes.use(express.urlencoded({extended:true}))
+AboutRoutes.use(express.json())
+AboutRoutes.use(express.urlencoded({extended:true}))
 
-AboutHomes.use('/',  (req,res)=>{
-    
+AboutRoutes.use((req,res)=>{
+    const path = (fileURLToPath(import.meta.url)
+    .split('\\routes\\about.js')[0] + "/templates/sobre.html")
+    res.sendFile(path)
 })
