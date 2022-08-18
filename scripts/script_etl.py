@@ -2,7 +2,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
-from conf import postgresql as settings
+from urllib.parse import quote_plus as urlquote
+import os
 import pandas as pd
 import datetime
 
@@ -27,8 +28,10 @@ codigos_estados = {
 
 
 #conectadno o banco de dados 
-def get_engine(user,password, host,port,db):
-    url = f'postgresql://{user}:{password}@{host}:{port}/{db}'
+def inicializa_bd():
+    url = "postgresql://%s:%s@%s" % (os.environ.get('POSTGRES_USER'), urlquote(os.environ.get('POSTGRES_PASSWORD')),
+                                         os.environ.get('POSTGRES_HOST') + ":5432/" + os.environ.get('POSTGRES_DB'))
+        
     if not database_exists(url):
         create_database(url)
 
@@ -37,16 +40,7 @@ def get_engine(user,password, host,port,db):
     return engine
 
 #criada para não passar varios parametros toda vez as informacoes do banco
-def get_engine_conf():
-    keys = ['pguser','password','pghost','pgport','pgdb']
-    if not all(key in keys for key in settings.keys()):
-        raise Exception('Deu erro na file conf!')
-    
-    return get_engine(settings['pguser'],
-                           settings['password'] ,
-                            settings['pghost'],
-                           settings['pgport'],
-                           settings['pgdb'])
+
 
 #criada para ler o arquivo csv
 def ler_arquivo_csv(arq):
@@ -250,7 +244,7 @@ def tabela_fato(engine):
 #feito para chamar as outras funções 
 def main():
   
-    engine = get_engine_conf()
+    engine = inicializa_bd()
     df_2022 = ler_arquivo_csv('arquivos/INFLUD22-25-07-2022.csv')
     print(df_2022)
     df_2022.columns = [col.lower() for col in df_2022.columns]
