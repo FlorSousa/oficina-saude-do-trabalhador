@@ -29,3 +29,25 @@ Comando para entrar dentro do container no banco de dados
 ```
   docker exec -it db-oficina psql -U postgres --dbname=db_oficina
 ```
+
+## Comandos SQL para consultar o banco
+
+```
+  SELECT * FROM tabela_fato;
+```
+
+```
+  SELECT * FROM dim_data;
+```
+
+```
+  SELECT * FROM dim_sexo;
+```
+
+```
+  SELECT * FROM dim_ocupacao;
+```
+
+```
+  SELECT * FROM dim_estado;
+```
