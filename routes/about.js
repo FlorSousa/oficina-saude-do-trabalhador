@@ -7,6 +7,6 @@ AboutRoutes.use(express.urlencoded({extended:true}))
 
 AboutRoutes.use((req,res)=>{
     const path = (fileURLToPath(import.meta.url)
-    .split('\\routes\\about.js')[0] + "/templates/sobre.html")
+    .split('\\routes\\about.js')[0] + "/views/sobre.html")
     res.sendFile(path)
 })
