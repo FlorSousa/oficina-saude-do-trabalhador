@@ -25,7 +25,8 @@ services:
       - .:/code
     links:
       - db_oficina
-
+    env_file:
+      - .env
     environment:
       WAIT_HOSTS: db_oficina:5432
       WAIT_HOSTS_TIMEOUT: 300
