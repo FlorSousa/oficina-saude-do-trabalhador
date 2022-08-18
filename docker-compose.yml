@@ -18,10 +18,11 @@ services:
     build:
       context: ./scripts
       dockerfile: Dockerfile
-    
+    command: sh -c "/wait && python /code/scripts/script_etl.py"
     depends_on: 
       - db_oficina
-
+    volumes:
+      - .:/code
     links:
       - db_oficina
 
