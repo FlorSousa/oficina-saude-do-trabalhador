@@ -96,6 +96,7 @@ def dim_ocupacao(engine):
         print('criando dimensao ocupacao')
         query = 'SELECT DISTINCT pac_cocbo , lower(pac_dscbo) FROM srag;'
         cbo_srag = pd.read_sql_query(query, engine)
+        print(cbo_srag)
         df3 = pd.DataFrame(cbo_srag)
         df3.rename(columns={'pac_cocbo': 'CODIGO', 'lower':'TITULO'}, inplace=True)
         
@@ -250,11 +251,12 @@ def main():
     df_2022.columns = [col.lower() for col in df_2022.columns]
     #print(df_2022)
     df_2022.to_sql('srag', con = engine,index=False, if_exists='replace')
-    tabela_fato(engine)
     dim_data(engine)
     dim_sexo(engine)
     dim_ocupacao(engine)
     dim_estado(engine)
+    tabela_fato(engine)
+
     
    
     
