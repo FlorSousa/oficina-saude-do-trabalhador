@@ -51,3 +51,6 @@ Comando para entrar dentro do container no banco de dados
 ```
   SELECT * FROM dim_estado;
 ```
+```
+  SELECT * FROM srag;
+```
