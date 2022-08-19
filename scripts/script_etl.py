@@ -260,5 +260,5 @@ def main():
     
    
     
-if __name__ == '__main__': # chamada da funcao principal
+if __name__ == '__main__': #Só executa a função principal se o script não estiver sendo exportado em outro arquivo
     main() # chamada da função main
