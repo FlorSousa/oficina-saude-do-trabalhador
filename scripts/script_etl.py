@@ -53,20 +53,20 @@ def ler_arquivo_csv(arq):
 #criação das dimensões 
 def dim_data(engine):
     #Utilizando pela a ORM SQLALchemy
-    try:
+    try: # Tratamento de erro
         print('criando dimensao data')
         conn = engine.connect()
         trans = conn.begin() 
         conn.execute('''DROP TABLE IF EXISTS dim_data''')
 
-    except Exception as e:
+    except Exception as e: #Caso exista algum erro
         print(f"finalizado com erro dim_data: {e}") 
 
-    finally:
+    finally: #Executa após o tratamento do erro
         conn.execute('''CREATE TABLE dim_data as SELECT DISTINCT SUBSTR(dt_notific, 7, 4)::int AS ano, SUBSTR(dt_notific, 4, 2)::int AS mes
                         FROM srag
                         ORDER BY mes;''')
-        trans.commit()
+        trans.commit() 
         print('finalizado com sucesso dim_data')
 
     trans.close()
